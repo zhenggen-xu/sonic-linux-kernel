@@ -22,4 +22,4 @@ stg init
 stg import -s ../patch/series
 
 # Building a custom kernel from Debian kernel source
-fakeroot make -f debian/rules.gen binary-arch_amd64_none_amd64
+fakeroot make -f debian/rules.gen binary-arch_amd64_none
