@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Obtaining the Debian kernel source
-apt-get source linux=3.16.7-ckt11-1+deb8u3
+wget https://launchpad.net/debian/+archive/primary/+files/linux_3.16.7-ckt11-1+deb8u3.dsc
+wget https://launchpad.net/debian/+archive/primary/+files/linux_3.16.7-ckt11.orig.tar.xz
+wget https://launchpad.net/debian/+archive/primary/+files/linux_3.16.7-ckt11-1+deb8u3.debian.tar.xz
+
+dpkg-source -x linux_3.16.7-ckt11-1+deb8u3.dsc
 
 cd linux-*
 # patch debian changelog and update kernel package version
