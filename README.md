@@ -1,3 +1,5 @@
+[![Build Status](https://sonic-jenkins.westus.cloudapp.azure.com/job/sonic-linux-kernel-build/badge/icon)](https://sonic-jenkins.westus.cloudapp.azure.com/job/sonic-linux-kernel-build/)
+
 # SONiC - Kernel
 
 ## Description
