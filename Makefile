@@ -1,12 +1,12 @@
 .ONESHELL:
 SHELL = /bin/bash
 
-KVERSION_SHORT ?= 3.16.0-5
+KVERSION_SHORT ?= 4.9.0-3
 KVERSION ?= $(KVERSION_SHORT)-amd64
-KERNEL_VERSION ?= 3.16.51
-KERNEL_SUBVERSION ?= 3+deb8u1
+KERNEL_VERSION ?= 4.9.30
+KERNEL_SUBVERSION ?= 2+deb9u5
 
-MAIN_TARGET = linux-headers-$(KVERSION_SHORT)-common_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
+MAIN_TARGET = linux-headers-$(KVERSION_SHORT)-common_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_all.deb
 DERIVED_TARGETS = linux-headers-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb \
                  linux-image-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
 
@@ -16,9 +16,9 @@ DEBIAN_FILE = linux_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION).debian.tar.xz
 URL = http://security.debian.org/debian-security/pool/updates/main/l/linux
 BUILD_DIR=linux-$(KERNEL_VERSION)
 
-DSC_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/$(DSC_FILE)?sv=2015-04-05&sr=b&sig=FzpIoc5gzw9oj09C0ifOaCTMo6K%2BP0WadjFgprGe508%3D&se=2117-12-17T19%3A52%3A55Z&sp=r"
-DEBIAN_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/$(DEBIAN_FILE)?sv=2015-04-05&sr=b&sig=E65G0WdVW4FrpDQxmKqjuKjur2QM%2BycXy5NbVtmBYlY%3D&se=2117-12-17T19%3A54%3A03Z&sp=r"
-ORIG_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/$(ORIG_FILE)?sv=2015-04-05&sr=b&sig=f%2BXBexkqVW9nru%2FwjT%2FNUwToUP3uMRnokIpuZa9AbHk%3D&se=2117-12-17T19%3A54%3A25Z&sp=r"
+DSC_FILE_URL = "$(URL)/$(DSC_FILE)"
+DEBIAN_FILE_URL = "$(URL)/$(DEBIAN_FILE)"
+ORIG_FILE_URL = "$(URL)/$(ORIG_FILE)"
 
 $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	# Obtaining the Debian kernel source
@@ -34,10 +34,10 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	git add -f *
 
 	# patch debian changelog and update kernel package version
-	git am ../patch/changelog.patch
+	# git am ../patch/changelog.patch
 
 	# re-generate debian/rules.gen, requires kernel-wedge
-	debian/bin/gencontrol.py
+	# debian/bin/gencontrol.py
 
 	# generate linux build file for amd64_none_amd64
 	fakeroot make -f debian/rules.gen setup_amd64_none_amd64
@@ -49,6 +49,7 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	stg import -s ../patch/series
 
 	# Building a custom kernel from Debian kernel source
+	DO_DOCS=False fakeroot make -f debian/rules -j $(shell nproc) binary-indep
 	fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_amd64_none
 	popd
 
