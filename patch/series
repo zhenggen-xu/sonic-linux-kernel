@@ -11,36 +11,38 @@
 0010-config-mellanox-configuration.patch
 0011-support-Broadcom-54616-Phy-for-Intel-igb-driver.patch
 0012-platform-mellanox-mlxreg-hotplug-driver-add-check-fo.patch
+driver-support-sff-8436-eeprom.patch
+driver-support-sff-8436-eeprom-update.patch
+driver-sff-8436-use-nvmem-framework.patch
+driver-sff-8436-use-nvmem_device_read.patch
+driver-i2c-bus-intel-ismt-add-delay-param.patch
+driver-pca954x-i2c-mux-force-deselect-on-exit-flag.patch
+driver-hwmon-max6620.patch
+driver-hwmon-max6620-fix-rpm-calc.patch
+driver-hwmon-max6620-update.patch
+driver-hwmon-pmbus-dni_dps460.patch
+driver-hwmon-pmbus-dni_dps460-update-pmbus-core.patch
+driver-support-tun-config-carrier-enable.patch
+config-dell-s6000.patch
+config-dell-z9100.patch
+config-ingrasys-s9100.patch
 #
 # This series applies on GIT commit 1451b36b2b0d62178e42f648d8a18131af18f7d8
 # Tkernel-sched-core-fix-cgroup-fork-race.patch
-# Tconfig-dell-s6000.patch
 # Tconfig-mlnx-sn2700.patch
-# Tconfig-dell-z9100.patch
-# Tconfig-ingrasys-s9100.patch
 # Tdriver-at24-fix-odd-length-two-byte-access.patch
-# Tdriver-hwmon-max6620.patch
-# Tdriver-hwmon-max6620-fix-rpm-calc.patch
-# Tdriver-hwmon-max6620-update.patch
 # Tdriver-hwmon-lm75b-update.patch
-# Tdriver-hwmon-pmbus-dni_dps460.patch
-# Tdriver-hwmon-pmbus-dni_dps460-update-pmbus-core.patch
-# Tdriver-i2c-bus-intel-ismt-add-delay-param.patch
-# Tdriver-support-sff-8436-eeprom.patch
-# Tdriver-support-sff-8436-eeprom-update.patch
 # Tdriver-hwmon-pmbus-add-dps460-support.patch
 # Tdriver-hwmon-pmbus-ucd9200-mlnx.patch
 # Tdriver-arista-piix4-mux-patch.patch
 # Tdriver-arista-net-tg3-dma-mask-4g-sb800.patch
 # Tdriver-arista-net-tg3-access-regs-indirectly.patch
 # Tdriver-arista-net-tg3-disallow-broadcom-default-mac.patch
-# Tdriver-pca954x-i2c-mux-force-deselect-on-exit-flag.patch
 # Tlinux-3.19-mmc-sdhci-Add-a-quirk-for-AMD-SDHC-transfer-mode-reg.patch
 # Tlinux-3.19-mmc-sdhci-pci-enable-the-clear-transfer-mode-registe.patch
 # Tlinux-3.19-mmc-sdhci-pci-enable-sdhci-doesn-t-support-hs200-qui.patch
 # Trtnetlink-catch-EOPNOTSUPP-errors.patch
 # Tbridge-per-port-multicast-broadcast-flood-flags.patch
-# Tdriver-support-tun-config-carrier-enable.patch
 # Tconfig-arista-7060-cx32s.patch
 # Tconfig-mitac-ly1200.patch
 # Tconfig-quanta-ix1b.patch

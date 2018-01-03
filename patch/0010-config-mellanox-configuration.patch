@@ -1,6 +1,7 @@
 From c951dd6c826de2dbcb1d239743448bb56753ef96 Mon Sep 17 00:00:00 2001
+
 From: root <vadimp@mellanox.com>
-Date: Mon, 27 Nov 2017 15:53:20 +0200
+
 Subject: [v4.9 backport 10/10] config: mellanox configuration
 
 It adds the next configuration flags, used by Mellanox systems:
@@ -31,11 +32,11 @@ CONFIG_MAX1363=y
 
 Signed-off-by: Vadim Pastrenak <vadimp@melanox.com>
 ---
- debian/build/build_amd64_none_amd64/.config | 28 +++++++++++++++++++++++-----
- 1 file changed, 23 insertions(+), 5 deletions(-)
+ debian/build/build_amd64_none_amd64/.config |   39 ++++++++++++++++++++++++---
+ 1 file changed, 34 insertions(+), 5 deletions(-)
 
 diff --git a/debian/build/build_amd64_none_amd64/.config b/debian/build/build_amd64_none_amd64/.config
-index 88a71ef..f1930a1 100644
+index 88a71ef..e927c8d 100644
 --- a/debian/build/build_amd64_none_amd64/.config
 +++ b/debian/build/build_amd64_none_amd64/.config
 @@ -2632,7 +2632,13 @@ CONFIG_MLX4_DEBUG=y
@@ -58,7 +59,7 @@ index 88a71ef..f1930a1 100644
  # CONFIG_I2C_MUX_PCA954x is not set
  # CONFIG_I2C_MUX_PINCTRL is not set
 -# CONFIG_I2C_MUX_REG is not set
-+CONFIG_I2C_MUX_REG=y
++CONFIG_I2C_MUX_REG=m
 +CONFIG_I2C_MUX_MLXCPLD=m
  CONFIG_I2C_HELPER_AUTO=y
  CONFIG_I2C_SMBUS=m
@@ -76,22 +77,19 @@ index 88a71ef..f1930a1 100644
  CONFIG_SENSORS_IBMAEM=m
  CONFIG_SENSORS_IBMPEX=m
 -# CONFIG_SENSORS_IIO_HWMON is not set
-+CONFIG_SENSORS_IIO_HWMON=y
++CONFIG_SENSORS_IIO_HWMON=m
  CONFIG_SENSORS_I5500=m
  CONFIG_SENSORS_CORETEMP=m
  CONFIG_SENSORS_IT87=m
-@@ -3932,7 +3949,21 @@ CONFIG_SENSORS_NCT6775=m
+@@ -3932,7 +3940,21 @@ CONFIG_SENSORS_NCT6775=m
  # CONFIG_SENSORS_NCT7802 is not set
  # CONFIG_SENSORS_NCT7904 is not set
  CONFIG_SENSORS_PCF8591=m
 -# CONFIG_PMBUS is not set
 +CONFIG_PMBUS=m
 +CONFIG_SENSORS_PMBUS=m
-+CONFIG_SENSORS_LM25066=m
-+CONFIG_SENSORS_TPS53679=m
-+CONFIG_SENSORS_UCD9000=m
-+CONFIG_SENSORS_UCD9200=m
 +# CONFIG_SENSORS_ADM1275 is not set
++CONFIG_SENSORS_LM25066=m
 +# CONFIG_SENSORS_LTC2978 is not set
 +# CONFIG_SENSORS_LTC3815 is not set
 +# CONFIG_SENSORS_MAX16064 is not set
@@ -99,11 +97,14 @@ index 88a71ef..f1930a1 100644
 +# CONFIG_SENSORS_MAX34440 is not set
 +# CONFIG_SENSORS_MAX8688 is not set
 +# CONFIG_SENSORS_TPS40422 is not set
++CONFIG_SENSORS_TPS53679=m
++CONFIG_SENSORS_UCD9000=m
++CONFIG_SENSORS_UCD9200=m
 +# CONFIG_SENSORS_ZL6100 is not set
  # CONFIG_SENSORS_SHT15 is not set
  CONFIG_SENSORS_SHT21=m
  # CONFIG_SENSORS_SHT3x is not set
-@@ -5904,6 +5919,9 @@ CONFIG_LEDS_MENF21BMC=m
+@@ -5904,6 +5926,9 @@ CONFIG_LEDS_MENF21BMC=m
  #
  # CONFIG_LEDS_BLINKM is not set
  # CONFIG_LEDS_MLXCPLD is not set
@@ -113,7 +114,7 @@ index 88a71ef..f1930a1 100644
  
  #
  # LED Triggers
-@@ -6483,10 +6497,14 @@ CONFIG_PVPANIC=m
+@@ -6483,10 +6508,14 @@ CONFIG_PVPANIC=m
  CONFIG_INTEL_PMC_IPC=m
  CONFIG_SURFACE_PRO3_BUTTON=m
  # CONFIG_INTEL_PUNIT_IPC is not set
@@ -128,15 +129,12 @@ index 88a71ef..f1930a1 100644
  CONFIG_CLKDEV_LOOKUP=y
  CONFIG_HAVE_CLK_PREPARE=y
  CONFIG_COMMON_CLK=y
-@@ -6621,7 +6639,7 @@ CONFIG_MMA9553=m
+@@ -6621,7 +6650,7 @@ CONFIG_MMA9553=m
  # CONFIG_INA2XX_ADC is not set
  # CONFIG_LTC2485 is not set
  # CONFIG_MAX1027 is not set
 -# CONFIG_MAX1363 is not set
-+CONFIG_MAX1363=y
++CONFIG_MAX1363=m
  # CONFIG_MCP320X is not set
  # CONFIG_MCP3422 is not set
  # CONFIG_NAU7802 is not set
--- 
-2.11.0
-
