@@ -27,6 +27,7 @@ config-dell-s6000.patch
 config-dell-z9100.patch
 config-ingrasys-s9100.patch
 config-arista-7060-cx32s.patch
+bridge-add-per-port-broadcast-flood-flag.patch
 #
 # This series applies on GIT commit 1451b36b2b0d62178e42f648d8a18131af18f7d8
 # Tkernel-sched-core-fix-cgroup-fork-race.patch
