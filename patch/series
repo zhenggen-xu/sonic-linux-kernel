@@ -40,12 +40,8 @@ config-optoe.patch
 # Tdriver-hwmon-lm75b-update.patch
 # Tdriver-hwmon-pmbus-add-dps460-support.patch
 # Tdriver-hwmon-pmbus-ucd9200-mlnx.patch
-# Tdriver-arista-piix4-mux-patch.patch
 # Tdriver-arista-net-tg3-dma-mask-4g-sb800.patch
 # Tdriver-arista-net-tg3-access-regs-indirectly.patch
 # Tdriver-arista-net-tg3-disallow-broadcom-default-mac.patch
-# Tlinux-3.19-mmc-sdhci-Add-a-quirk-for-AMD-SDHC-transfer-mode-reg.patch
-# Tlinux-3.19-mmc-sdhci-pci-enable-the-clear-transfer-mode-registe.patch
-# Tlinux-3.19-mmc-sdhci-pci-enable-sdhci-doesn-t-support-hs200-qui.patch
 # Trtnetlink-catch-EOPNOTSUPP-errors.patch
 # Tbridge-per-port-multicast-broadcast-flood-flags.patch
