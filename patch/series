@@ -11,6 +11,9 @@
 0010-config-mellanox-configuration.patch
 0011-support-Broadcom-54616-Phy-for-Intel-igb-driver.patch
 0012-platform-mellanox-mlxreg-hotplug-driver-add-check-fo.patch
+driver-arista-net-tg3-dma-mask-4g-sb800.patch
+driver-arista-net-tg3-disallow-broadcom-default-mac.patch
+driver-arista-net-tg3-access-regs-indirectly.patch
 driver-support-sff-8436-eeprom.patch
 driver-support-sff-8436-eeprom-update.patch
 driver-sff-8436-use-nvmem-framework.patch
@@ -40,8 +43,5 @@ config-optoe.patch
 # Tdriver-hwmon-lm75b-update.patch
 # Tdriver-hwmon-pmbus-add-dps460-support.patch
 # Tdriver-hwmon-pmbus-ucd9200-mlnx.patch
-# Tdriver-arista-net-tg3-dma-mask-4g-sb800.patch
-# Tdriver-arista-net-tg3-access-regs-indirectly.patch
-# Tdriver-arista-net-tg3-disallow-broadcom-default-mac.patch
 # Trtnetlink-catch-EOPNOTSUPP-errors.patch
 # Tbridge-per-port-multicast-broadcast-flood-flags.patch
