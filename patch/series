@@ -46,7 +46,6 @@ config-mitac-ly1200.patch
 # Tlinux-3.19-mmc-sdhci-pci-enable-sdhci-doesn-t-support-hs200-qui.patch
 # Trtnetlink-catch-EOPNOTSUPP-errors.patch
 # Tbridge-per-port-multicast-broadcast-flood-flags.patch
-# Tconfig-quanta-ix1b.patch
 # Tdriver-i2c-bus-ismt-i801-support-intel-denverton.patch
 # Tdriver-support-optoe.patch
 # Tdriver-support-optoe-EOF_fix.patch
