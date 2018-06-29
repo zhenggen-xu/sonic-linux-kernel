@@ -27,6 +27,7 @@ driver-hwmon-max6620-fix-rpm-calc.patch
 driver-hwmon-max6620-update.patch
 driver-hwmon-pmbus-dni_dps460.patch
 driver-hwmon-pmbus-dni_dps460-update-pmbus-core.patch
+driver-hwmon-pmbus-dps1900.patch
 driver-support-tun-config-carrier-enable.patch
 driver-support-optoe.patch
 driver-support-optoe-EOF_fix.patch
@@ -34,6 +35,7 @@ bridge-add-per-port-broadcast-flood-flag.patch
 config-dell-s6000.patch
 config-dell-z9100.patch
 config-ingrasys-s9100.patch
+config-arista-dps1900.patch
 config-arista-7060-cx32s.patch
 config-mitac-ly1200.patch
 config-optoe.patch
