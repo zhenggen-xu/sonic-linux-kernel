@@ -1,7 +1,7 @@
 .ONESHELL:
 SHELL = /bin/bash
 
-ifneq ($(kernel_build_method), "build")
+ifneq ($(kernel_procure_method), "build")
 # Downloading kernel
 
 LINUX_HEADER_COMMON = linux-headers-3.16.0-5-common_3.16.51-3+deb8u1_amd64.deb
