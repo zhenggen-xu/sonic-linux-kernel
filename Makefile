@@ -7,9 +7,37 @@ KVERSION ?= $(KVERSION_SHORT)-amd64
 KERNEL_VERSION ?= 4.9.65
 KERNEL_SUBVERSION ?= 3+deb9u2
 
-MAIN_TARGET = linux-headers-$(KVERSION_SHORT)-common_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_all.deb
-DERIVED_TARGETS = linux-headers-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb \
-                 linux-image-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
+LINUX_HEADER_COMMON = linux-headers-$(KVERSION_SHORT)-common_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_all.deb
+LINUX_HEADER_AMD64 = linux-headers-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
+LINUX_IMAGE = linux-image-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
+
+MAIN_TARGET = $(LINUX_HEADER_COMMON)
+DERIVED_TARGETS = $(LINUX_HEADER_AMD64) $(LINUX_IMAGE)
+
+ifneq ($(kernel_build_method), "build")
+# Downloading kernel
+
+LINUX_HEADER_COMMON_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-4.9.0-5-common_4.9.65-3+deb9u2_all.deb?sv=2015-04-05&sr=b&sig=LtMcms7eBqw6IaJq37FdHXXN8GBrlIXouSnPEmmoxMM%3D&se=2155-07-04T07%3A33%3A59Z&sp=r"
+
+LINUX_HEADER_AMD64_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-4.9.0-5-amd64_4.9.65-3+deb9u2_amd64.deb?sv=2015-04-05&sr=b&sig=PTCh3FhHxOlSvqlKZIARbAsjcGVQWjogewNzKN%2FtPDM%3D&se=2024-04-24T15%3A33%3A34Z&sp=r"
+
+LINUX_IMAGE_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-image-4.9.0-5-amd64_4.9.65-3+deb9u2_amd64.deb?sv=2015-04-05&sr=b&sig=eWBMDs2pooGGYC9VF%2Bm2GW%2BG%2F4T4%2BXHk9K86vwbX2Og%3D&se=2155-07-04T07%3A34%3A51Z&sp=r"
+
+$(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
+	# Obtaining the Debian kernel packages
+	rm -rf $(BUILD_DIR)
+	wget -O $(LINUX_HEADER_COMMON) $(LINUX_HEADER_COMMON_URL)
+	wget -O $(LINUX_HEADER_AMD64) $(LINUX_HEADER_AMD64_URL)
+	wget -O $(LINUX_IMAGE) $(LINUX_IMAGE_URL)
+
+ifneq ($(DEST),)
+	mv $(DERIVED_TARGETS) $* $(DEST)/
+endif
+
+$(addprefix $(DEST)/, $(DERIVED_TARGETS)): $(DEST)/% : $(DEST)/$(MAIN_TARGET)
+
+else
+# Building kernel
 
 DSC_FILE = linux_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION).dsc
 ORIG_FILE = linux_$(KERNEL_VERSION).orig.tar.xz
@@ -60,3 +88,5 @@ ifneq ($(DEST),)
 endif
 
 $(addprefix $(DEST)/, $(DERIVED_TARGETS)): $(DEST)/% : $(DEST)/$(MAIN_TARGET)
+
+endif # building kernel
