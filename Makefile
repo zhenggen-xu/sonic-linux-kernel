@@ -14,7 +14,7 @@ LINUX_IMAGE = linux-image-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd
 MAIN_TARGET = $(LINUX_HEADER_COMMON)
 DERIVED_TARGETS = $(LINUX_HEADER_AMD64) $(LINUX_IMAGE)
 
-ifneq ($(kernel_build_method), "build")
+ifneq ($(kernel_procure_method), "build")
 # Downloading kernel
 
 LINUX_HEADER_COMMON_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-4.9.0-5-common_4.9.65-3+deb9u2_all.deb?sv=2015-04-05&sr=b&sig=LtMcms7eBqw6IaJq37FdHXXN8GBrlIXouSnPEmmoxMM%3D&se=2155-07-04T07%3A33%3A59Z&sp=r"
