@@ -61,21 +61,25 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	pushd $(BUILD_DIR)
 	git init
 	git add -f *
-	git commit -m "check in all loose files and diffs"
+	git commit -qm "check in all loose files and diffs"
 
-	# patch debian changelog and update kernel package version
-	# git am ../patch/changelog.patch
+	# patching anything that could affect following configuration generation.
+	stg init
+	stg import -s ../patch/preconfig/series
 
 	# re-generate debian/rules.gen, requires kernel-wedge
-	# debian/bin/gencontrol.py
+	debian/bin/gencontrol.py
 
 	# generate linux build file for amd64_none_amd64
 	fakeroot make -f debian/rules.gen setup_amd64_none_amd64
 
 	# Applying patches and configuration changes
 	git add debian/build/build_amd64_none_amd64/.config -f
+	git add debian/config.defines.dump -f
 	git commit -m "unmodified debian source"
-	stg init
+
+	# Learning new git repo head (above commit) by calling stg repair.
+	stg repair
 	stg import -s ../patch/series
 
 	# Building a custom kernel from Debian kernel source
