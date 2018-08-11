@@ -2,21 +2,27 @@
 SHELL = /bin/bash
 .SHELLFLAGS += -e
 
-ifneq ($(kernel_procure_method), "build")
+KVERSION_SHORT ?= 4.9.0-5
+KVERSION ?= $(KVERSION_SHORT)-amd64
+KERNEL_VERSION ?= 4.9.65
+KERNEL_SUBVERSION ?= 3+deb9u2
+kernel_procure_method ?= build
+
+LINUX_HEADER_COMMON = linux-headers-$(KVERSION_SHORT)-common_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_all.deb
+LINUX_HEADER_AMD64 = linux-headers-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
+LINUX_IMAGE = linux-image-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
+
+MAIN_TARGET = $(LINUX_HEADER_COMMON)
+DERIVED_TARGETS = $(LINUX_HEADER_AMD64) $(LINUX_IMAGE)
+
+ifneq ($(kernel_procure_method), build)
 # Downloading kernel
 
-LINUX_HEADER_COMMON = linux-headers-3.16.0-5-common_3.16.51-3+deb8u1_amd64.deb
-LINUX_HEADER_COMMON_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-3.16.0-5-common_3.16.51-3+deb8u1_amd64.deb?sv=2015-04-05&sr=b&sig=t3zPXXWP%2BDOVBRAYeFfobX%2FWtxQRSS9QTWWJZVU3PQg%3D&se=2032-03-08T02%3A59%3A37Z&sp=r"
+LINUX_HEADER_COMMON_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-4.9.0-5-common_4.9.65-3+deb9u2_all.deb?sv=2015-04-05&sr=b&sig=LtMcms7eBqw6IaJq37FdHXXN8GBrlIXouSnPEmmoxMM%3D&se=2155-07-04T07%3A33%3A59Z&sp=r"
 
-LINUX_HEADER_AMD64 = linux-headers-3.16.0-5-amd64_3.16.51-3+deb8u1_amd64.deb
-LINUX_HEADER_AMD64_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-3.16.0-5-amd64_3.16.51-3+deb8u1_amd64.deb?sv=2015-04-05&sr=b&sig=9%2FeG5iU%2BKhpFVjwQ379eLz7MdL%2FjuKKdbyWalFINO1A%3D&se=2032-03-10T15%3A35%3A57Z&sp=r"
+LINUX_HEADER_AMD64_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-headers-4.9.0-5-amd64_4.9.65-3+deb9u2_amd64.deb?sv=2015-04-05&sr=b&sig=PTCh3FhHxOlSvqlKZIARbAsjcGVQWjogewNzKN%2FtPDM%3D&se=2024-04-24T15%3A33%3A34Z&sp=r"
 
-LINUX_IMAGE = linux-image-3.16.0-5-amd64_3.16.51-3+deb8u1_amd64.deb
-LINUX_IMAGE_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-image-3.16.0-5-amd64_3.16.51-3+deb8u1_amd64.deb?sv=2015-04-05&sr=b&sig=ySooXCR1xEr1nUeJqV2r9QiBA3RwcxyundWCVtpIYWk%3D&se=2032-03-08T03%3A01%3A22Z&sp=r"
-
-MAIN_TARGET = linux-headers-3.16.0-5-common_3.16.51-3+deb8u1_amd64.deb
-DERIVED_TARGETS = linux-headers-3.16.0-5-amd64_3.16.51-3+deb8u1_amd64.deb \
-                  linux-image-3.16.0-5-amd64_3.16.51-3+deb8u1_amd64.deb
+LINUX_IMAGE_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/linux-image-4.9.0-5-amd64_4.9.65-3+deb9u2_amd64.deb?sv=2015-04-05&sr=b&sig=eWBMDs2pooGGYC9VF%2Bm2GW%2BG%2F4T4%2BXHk9K86vwbX2Og%3D&se=2155-07-04T07%3A34%3A51Z&sp=r"
 
 $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	# Obtaining the Debian kernel packages
@@ -34,24 +40,15 @@ $(addprefix $(DEST)/, $(DERIVED_TARGETS)): $(DEST)/% : $(DEST)/$(MAIN_TARGET)
 else
 # Building kernel
 
-KVERSION_SHORT ?= 3.16.0-5
-KVERSION ?= $(KVERSION_SHORT)-amd64
-KERNEL_VERSION ?= 3.16.51
-KERNEL_SUBVERSION ?= 3+deb8u1
-
-MAIN_TARGET = linux-headers-$(KVERSION_SHORT)-common_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
-DERIVED_TARGETS = linux-headers-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb \
-                 linux-image-$(KVERSION)_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION)_amd64.deb
-
 DSC_FILE = linux_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION).dsc
 ORIG_FILE = linux_$(KERNEL_VERSION).orig.tar.xz
 DEBIAN_FILE = linux_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION).debian.tar.xz
 URL = http://security.debian.org/debian-security/pool/updates/main/l/linux
 BUILD_DIR=linux-$(KERNEL_VERSION)
 
-DSC_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/$(DSC_FILE)?sv=2015-04-05&sr=b&sig=FzpIoc5gzw9oj09C0ifOaCTMo6K%2BP0WadjFgprGe508%3D&se=2117-12-17T19%3A52%3A55Z&sp=r"
-DEBIAN_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/$(DEBIAN_FILE)?sv=2015-04-05&sr=b&sig=E65G0WdVW4FrpDQxmKqjuKjur2QM%2BycXy5NbVtmBYlY%3D&se=2117-12-17T19%3A54%3A03Z&sp=r"
-ORIG_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/$(ORIG_FILE)?sv=2015-04-05&sr=b&sig=f%2BXBexkqVW9nru%2FwjT%2FNUwToUP3uMRnokIpuZa9AbHk%3D&se=2117-12-17T19%3A54%3A25Z&sp=r"
+DSC_FILE_URL = "$(URL)/$(DSC_FILE)"
+DEBIAN_FILE_URL = "$(URL)/$(DEBIAN_FILE)"
+ORIG_FILE_URL = "$(URL)/$(ORIG_FILE)"
 
 $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	# Obtaining the Debian kernel source
@@ -65,7 +62,7 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	pushd $(BUILD_DIR)
 	git init
 	git add -f *
-	git commit -m "check in all loose files and diffs"
+	git commit -qm "check in all loose files and diffs"
 
 	# patching anything that could affect following configuration generation.
 	stg init
@@ -79,6 +76,7 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 
 	# Applying patches and configuration changes
 	git add debian/build/build_amd64_none_amd64/.config -f
+	git add debian/config.defines.dump -f
 	git commit -m "unmodified debian source"
 
 	# Learning new git repo head (above commit) by calling stg repair.
@@ -86,6 +84,7 @@ $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	stg import -s ../patch/series
 
 	# Building a custom kernel from Debian kernel source
+	DO_DOCS=False fakeroot make -f debian/rules -j $(shell nproc) binary-indep
 	fakeroot make -f debian/rules.gen -j $(shell nproc) binary-arch_amd64_none
 	popd
 

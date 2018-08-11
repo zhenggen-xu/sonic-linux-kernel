@@ -1,9 +1,21 @@
+Enable CONFIG_SENSORS_DPS1900
+
+From: gulv <gulv@microsoft.com>
+
+
+---
+ debian/build/build_amd64_none_amd64/.config |    1 +
+ 1 file changed, 1 insertion(+)
+
 diff --git a/debian/build/build_amd64_none_amd64/.config b/debian/build/build_amd64_none_amd64/.config
-index 6b6aea9..14e32cb 100644
+index 29bcb1f..d59a9e0 100644
 --- a/debian/build/build_amd64_none_amd64/.config
 +++ b/debian/build/build_amd64_none_amd64/.config
-@@ -6820,3 +6821,4 @@ CONFIG_FONT_SUPPORT=y
- # CONFIG_FONTS is not set
- CONFIG_FONT_8x8=y
- CONFIG_FONT_8x16=y
+@@ -3956,6 +3956,7 @@ CONFIG_SENSORS_DNI_DPS460=m
+ CONFIG_SENSORS_TPS53679=m
+ CONFIG_SENSORS_UCD9000=m
+ CONFIG_SENSORS_UCD9200=m
 +CONFIG_SENSORS_DPS1900=m
+ # CONFIG_SENSORS_ZL6100 is not set
+ # CONFIG_SENSORS_SHT15 is not set
+ CONFIG_SENSORS_SHT21=m
