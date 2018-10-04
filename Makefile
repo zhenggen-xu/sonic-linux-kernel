@@ -17,9 +17,9 @@ DEBIAN_FILE = linux_$(KERNEL_VERSION)-$(KERNEL_SUBVERSION).debian.tar.xz
 URL = http://security.debian.org/debian-security/pool/updates/main/l/linux
 BUILD_DIR=linux-$(KERNEL_VERSION)
 
-DSC_FILE_URL = $(URL)/$(DSC_FILE)
-DEBIAN_FILE_URL = $(URL)/$(DEBIAN_FILE)
-ORIG_FILE_URL = $(URL)/$(ORIG_FILE)
+DSC_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/$(DSC_FILE)?sv=2015-04-05&sr=b&sig=MrxcOUmGZALsvb4ROPUqXBbRU8UfVtQi%2FJLWKVqF6WA%3D&se=2155-08-11T16%3A02%3A31Z&sp=r"
+DEBIAN_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/$(DEBIAN_FILE)?sv=2015-04-05&sr=b&sig=wn66yUesisxcNMJKyUfOy7Ol6qmU0JQWppiADjWOYio%3D&se=2155-08-11T16%3A03%3A01Z&sp=r"
+ORIG_FILE_URL = "https://sonicstorage.blob.core.windows.net/packages/kernel-public/$(ORIG_FILE)?sv=2015-04-05&sr=b&sig=bwePSkU3UAsbZUd0z9QF8Uz%2FQ354QYInijbF3RL0dik%3D&se=2155-08-11T16%3A03%3A23Z&sp=r"
 
 $(addprefix $(DEST)/, $(MAIN_TARGET)): $(DEST)/% :
 	# Obtaining the Debian kernel source
